@@ -8,7 +8,7 @@
 #include <iostream>
 #include <vector>
 
-#define N_AUDIOS 2
+#define N_AUDIOS 20
 #define wave ".wav"
 
 using namespace std;
@@ -17,12 +17,31 @@ ALLEGRO_AUDIO_STREAM *musica = NULL;
  
 int main(){
    char a[] = "a.wav", b[] = "b.wav";
-   int meuvetor[] = {0,1,1,0}; //na verdade seria uma matriz
-   int id = 0;
+   int minhaMatriz[20][3] = {1,2,3,
+                             2,4,99,
+                             5,6,99,
+                             1,2,7,
+                             8,9,10,
+                             11,12,99,
+                             5,11,12,
+                             13,14,99,
+                             0,-1,-1,
+                             10,15,16,
+                             17,18,99,
+                             12,16,99,
+                             18,19,99,
+                             12,15,16,
+                             0,-1,-1,
+                             0,-1,-1,
+                             0,-1,-1,
+                             0,-1,-1,
+                             0,-1,-1,
+                             0,-1,-1}; 
+   int id = 0, oldId = 0;
    int minhaEscolha = -1;
    vector<linhas> mylines;
    for(int i = 0; i < N_AUDIOS; i++){
-      mylines.push_back(linhas(i, meuvetor, ""));
+      mylines.push_back(linhas(i, minhaMatriz[i], ""));
    }
    cout << "Inicializei o vector de linhas" << endl;
    for(int i=0; i<N_AUDIOS; i++){
@@ -47,21 +66,28 @@ int main(){
       //esperar leitura do driver de botao aqui
       cin >> minhaEscolha;
       switch(minhaEscolha){
-         case 0: 
+         case 0:
+            oldId = id;
             id = mylines[id].escolhas[0];
             break;
          case 1:
+            oldId = id;
             id = mylines[id].escolhas[1];
             break;
          case 2:
+            oldId = id;
             id = mylines[id].escolhas[2];
             break;
-         case 3:
+         case 3: //repetir sua escolha
             id = id;
             al_rewind_audio_stream(mylines[id].som);
             break;
          default:
             id = -1;
+      }
+      if(id == 99){
+         id = oldId;
+         al_rewind_audio_stream(mylines[id].som);
       }
    }
     //al_destroy_sample(som_azul);
