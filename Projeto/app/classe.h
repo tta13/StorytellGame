@@ -12,7 +12,7 @@ class linhas{
 		void error_msg(char *text);
 		void inicializar(char *my_audio);
 		void play_audio();
-		ALLEGRO_AUDIO_STREAM *som = NULL;
+		ALLEGRO_AUDIO_STREAM *som;
 		int escolhas[3];
 		std::string texto;
 		int id;

@@ -2,6 +2,7 @@
 
 linhas::linhas(int id, int *escolhas, std::string texto){
 	this->id = id;
+	this->som = NULL;
 	for(int i=0;i<3;i++){
 		this->escolhas[i]= escolhas[i];
 	}
