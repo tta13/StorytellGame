@@ -24,7 +24,7 @@ using namespace std;
 ALLEGRO_AUDIO_STREAM *musica = NULL; 
  
 int main(){
-	const uint32_t trash = 0, ledg1 = 3, ledg2 = 12, ledg3 = 48, ledg4 = 192;
+	//const uint32_t trash = 0, ledg1 = 3, ledg2 = 12, ledg3 = 48, ledg4 = 192;
   	uint32_t bt = 0;
 
   	printf("Abrindo FPGA...\n");
@@ -34,7 +34,7 @@ int main(){
 		return -1;
 	}
   	printf("Limpando memória da placa...\n");
-  	write(dev, &trash, G_LEDS);
+  	//write(dev, &trash, G_LEDS);
   	
    	char a[] = "a.wav", b[] = "b.wav";
   	bool audios_Inicializados[20]={false};
@@ -109,19 +109,16 @@ int main(){
 				    //oldId = id;
 				    opa = false;
 				    id = mylines[id].escolhas[0];
-				    write(dev, &ledg3, G_LEDS);
 				    break;
 				 case 11:
 				    //oldId = id;
 				    opa = false;
 				    id = mylines[id].escolhas[1];
-				    write(dev, &ledg2, G_LEDS);
 				    break;
 				 case 13:
-				    //oldId = id;
+				    oldId = id;
 				    opa = false;
 				    id = mylines[id].escolhas[2];
-				    write(dev, &ledg1, G_LEDS);
 				    break;
 				 case 14: //repetir sua escolha
 				    id = id;
@@ -135,6 +132,9 @@ int main(){
 		 }
 		
 	}
+  if(id==99){
+    id = oldId;
+  }
       
    }
     //al_destroy_sample(som_azul);
