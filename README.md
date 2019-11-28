@@ -4,9 +4,9 @@
 ## Compilação e instalação do driver
  1. Abra o terminal.
  2. No terminal, vá para a pasta onde está o código do driver e Digite :
- `
+ ``` 
  $ make
- `
+ ```
 
  3. Depois :
  ```
